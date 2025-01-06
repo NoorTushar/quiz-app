@@ -24,13 +24,22 @@ export const quizSlice = createSlice({
    reducers: {
       selectAnswer: (state, action) => {
          const { answer, currentQuestionIndex } = action.payload;
-
          state.userAnswers[currentQuestionIndex] = answer;
+      },
+      nextQuestion: (state) => {
+         if (state.currentQuestionIndex < state.questions.length - 1) {
+            state.currentQuestionIndex += 1;
+         }
+      },
+      prevQuestion: (state) => {
+         if (state.currentQuestionIndex > 0) {
+            state.currentQuestionIndex -= 1;
+         }
       },
    },
 });
 
-export const { selectAnswer } = quizSlice.actions;
+export const { selectAnswer, nextQuestion, prevQuestion } = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectQuiz = (state: RootState) => state.quizes;

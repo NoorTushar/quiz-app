@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { selectAnswer, selectQuiz } from "@/redux/features/quiz/quizSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import QuizControls from "./QuizControls";
 
 const Questions = () => {
    const { questions, currentQuestionIndex, userAnswers } =
@@ -23,7 +24,9 @@ const Questions = () => {
       <div>
          <Card className="w-[450px]">
             <CardHeader>
-               <CardTitle>{currenQuestion?.question}</CardTitle>
+               <CardTitle className="min-h-[50px]">
+                  {currenQuestion?.question}
+               </CardTitle>
                <CardDescription>
                   Question {currentQuestionIndex + 1} of {questions.length}
                </CardDescription>
@@ -45,8 +48,7 @@ const Questions = () => {
                ))}
             </CardContent>
             <CardFooter className="flex justify-between">
-               <Button variant="outline">Cancel</Button>
-               <Button>Deploy</Button>
+               <QuizControls />
             </CardFooter>
          </Card>
       </div>
