@@ -22,7 +22,7 @@ const Questions = () => {
    };
    return (
       <div>
-         <Card className="w-[450px]">
+         <Card className="max-w-[450px] mx-auto">
             <CardHeader>
                <CardTitle className="min-h-[50px]">
                   {currenQuestion?.question}
