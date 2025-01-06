@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Button } from "./ui/button";
 import {
-   completeQuiz,
    nextQuestion,
    prevQuestion,
    selectQuiz,
 } from "@/redux/features/quiz/quizSlice";
+import QuizSummary from "./QuizSummary";
 
 const QuizControls = () => {
    const dispatch = useAppDispatch();
@@ -19,9 +19,6 @@ const QuizControls = () => {
       dispatch(prevQuestion());
    };
 
-   const handleCompleteQuiz = () => {
-      dispatch(completeQuiz());
-   };
    const lastQuestion = questions.length === currentQuestionIndex + 1;
    const isAnswerNull = userAnswers[currentQuestionIndex] === null;
 
@@ -35,12 +32,7 @@ const QuizControls = () => {
          </Button>
 
          {lastQuestion ? (
-            <Button
-               onClick={handleCompleteQuiz}
-               disabled={isAnswerNull || quizComplete}
-            >
-               Submit Quiz
-            </Button>
+            <QuizSummary />
          ) : (
             <Button
                disabled={lastQuestion || isAnswerNull}

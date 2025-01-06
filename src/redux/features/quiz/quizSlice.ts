@@ -1,6 +1,6 @@
 import { quizData } from "@/components/quizData";
 import { RootState } from "@/redux/store";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 interface TQuiz {
@@ -8,6 +8,7 @@ interface TQuiz {
    quizComplete: boolean;
    currentQuestionIndex: number;
    userAnswers: (string | null)[];
+   userScore: number;
 }
 
 // Define the initial state using that type
@@ -16,6 +17,7 @@ const initialState: TQuiz = {
    quizComplete: false,
    currentQuestionIndex: 0,
    userAnswers: Array(quizData.length).fill(null),
+   userScore: 0,
 };
 
 export const quizSlice = createSlice({
@@ -38,12 +40,34 @@ export const quizSlice = createSlice({
       },
       completeQuiz: (state) => {
          state.quizComplete = true;
+         let correctAnswer = 0;
+
+         state.questions.forEach((question, index) => {
+            if (question.correctAnswer === state.userAnswers[index]) {
+               correctAnswer++;
+            }
+         });
+
+         state.userScore = correctAnswer;
+      },
+
+      restartQuiz: (state) => {
+         state.currentQuestionIndex = 0;
+         state.questions = quizData;
+         state.quizComplete = false;
+         state.userAnswers = Array(quizData.length).fill(null);
+         state.userScore = 0;
       },
    },
 });
 
-export const { selectAnswer, nextQuestion, prevQuestion, completeQuiz } =
-   quizSlice.actions;
+export const {
+   selectAnswer,
+   nextQuestion,
+   prevQuestion,
+   completeQuiz,
+   restartQuiz,
+} = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectQuiz = (state: RootState) => state.quizes;
