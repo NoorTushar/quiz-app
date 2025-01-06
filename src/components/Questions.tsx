@@ -7,8 +7,13 @@ import {
    CardHeader,
    CardTitle,
 } from "@/components/ui/card";
+import { selectQuiz } from "@/redux/features/quiz/quizSlice";
+import { useAppSelector } from "@/redux/hooks";
 
 const Questions = () => {
+   const { questions } = useAppSelector(selectQuiz);
+   console.log(questions);
+
    return (
       <div>
          <Card className="w-[350px]">
