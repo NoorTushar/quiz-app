@@ -21,10 +21,16 @@ const initialState: TQuiz = {
 export const quizSlice = createSlice({
    name: "quiz",
    initialState,
-   reducers: {},
+   reducers: {
+      selectAnswer: (state, action) => {
+         const { answer, currentQuestionIndex } = action.payload;
+
+         state.userAnswers[currentQuestionIndex] = answer;
+      },
+   },
 });
 
-export const {} = quizSlice.actions;
+export const { selectAnswer } = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectQuiz = (state: RootState) => state.quizes;

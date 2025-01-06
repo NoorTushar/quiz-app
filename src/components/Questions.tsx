@@ -7,23 +7,43 @@ import {
    CardHeader,
    CardTitle,
 } from "@/components/ui/card";
-import { selectQuiz } from "@/redux/features/quiz/quizSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { selectAnswer, selectQuiz } from "@/redux/features/quiz/quizSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const Questions = () => {
-   const { questions } = useAppSelector(selectQuiz);
-   console.log(questions);
+   const { questions, currentQuestionIndex, userAnswers } =
+      useAppSelector(selectQuiz);
+   const dispatch = useAppDispatch();
+   const currenQuestion = questions[currentQuestionIndex];
 
+   const handleSelectAnswer = (answer: string) => {
+      dispatch(selectAnswer({ answer, currentQuestionIndex }));
+   };
    return (
       <div>
-         <Card className="w-[350px]">
+         <Card className="w-[450px]">
             <CardHeader>
-               <CardTitle>Create project</CardTitle>
+               <CardTitle>{currenQuestion?.question}</CardTitle>
                <CardDescription>
-                  Deploy your new project in one-click.
+                  Question {currentQuestionIndex + 1} of {questions.length}
                </CardDescription>
             </CardHeader>
-            <CardContent></CardContent>
+            <CardContent>
+               {currenQuestion.options.map((option, index) => (
+                  <Button
+                     onClick={() => handleSelectAnswer(option)}
+                     size="lg"
+                     className={`w-full my-2  ${
+                        userAnswers[currentQuestionIndex] === option
+                           ? "bg-primary dark:bg-primary"
+                           : "bg-secondary dark:bg-secondary-foreground"
+                     }`}
+                     key={index + index * Math.random()}
+                  >
+                     {option}
+                  </Button>
+               ))}
+            </CardContent>
             <CardFooter className="flex justify-between">
                <Button variant="outline">Cancel</Button>
                <Button>Deploy</Button>

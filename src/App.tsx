@@ -7,6 +7,7 @@ function App() {
       <>
          <div className="min-h-screen">
             <ModeToggle />
+            <h1 className="text-4xl text-center my-10">Tushar's Quiz App</h1>
 
             <Questions />
          </div>
