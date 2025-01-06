@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import QuizControls from "./QuizControls";
 
 const Questions = () => {
-   const { questions, currentQuestionIndex, userAnswers } =
+   const { questions, currentQuestionIndex, userAnswers, quizComplete } =
       useAppSelector(selectQuiz);
    const dispatch = useAppDispatch();
    const currenQuestion = questions[currentQuestionIndex];
@@ -34,6 +34,7 @@ const Questions = () => {
             <CardContent>
                {currenQuestion.options.map((option, index) => (
                   <Button
+                     disabled={quizComplete}
                      onClick={() => handleSelectAnswer(option)}
                      size="lg"
                      className={`w-full my-2  ${
@@ -42,6 +43,11 @@ const Questions = () => {
                            : "bg-secondary dark:bg-secondary-foreground"
                      }`}
                      key={index + index * Math.random()}
+                     //  variant={
+                     //     userAnswers[currentQuestionIndex] === option
+                     //        ? "default"
+                     //        : "outline"
+                     //  }
                   >
                      {option}
                   </Button>

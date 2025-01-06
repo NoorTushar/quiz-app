@@ -36,10 +36,14 @@ export const quizSlice = createSlice({
             state.currentQuestionIndex -= 1;
          }
       },
+      completeQuiz: (state) => {
+         state.quizComplete = true;
+      },
    },
 });
 
-export const { selectAnswer, nextQuestion, prevQuestion } = quizSlice.actions;
+export const { selectAnswer, nextQuestion, prevQuestion, completeQuiz } =
+   quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectQuiz = (state: RootState) => state.quizes;
