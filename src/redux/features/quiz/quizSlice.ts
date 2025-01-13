@@ -13,7 +13,7 @@ interface TQuiz {
 
 // Define the initial state using that type
 const initialState: TQuiz = {
-   questions: quizData,
+   questions: [],
    quizComplete: false,
    currentQuestionIndex: 0,
    userAnswers: Array(quizData.length).fill(null),
@@ -58,6 +58,10 @@ export const quizSlice = createSlice({
          state.userAnswers = Array(quizData.length).fill(null);
          state.userScore = 0;
       },
+
+      setQuiz: (state, action) => {
+         state.questions = action.payload;
+      },
    },
 });
 
@@ -67,6 +71,7 @@ export const {
    prevQuestion,
    completeQuiz,
    restartQuiz,
+   setQuiz,
 } = quizSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

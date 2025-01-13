@@ -70,12 +70,12 @@ const QuizSummary = () => {
                            <div key={answer} className="text-sm *:mt-3">
                               <p className="font-semibold">Question</p>
                               <p>
-                                 {index + 1}. {questions[index].question}
+                                 {index + 1}. {questions[index]?.question}
                               </p>
                               <p className="font-semibold">Your Answer</p>
                               <p
                                  className={`text-sm ${
-                                    questions[index].correctAnswer === answer
+                                    questions[index]?.correctAnswer === answer
                                        ? "text-green-500"
                                        : "text-red-500"
                                  }`}
@@ -84,7 +84,7 @@ const QuizSummary = () => {
                               </p>
                               <p className="font-semibold">Correct Answer</p>
                               <p className="text-sm">
-                                 {questions[index].correctAnswer}
+                                 {questions[index]?.correctAnswer}
                               </p>
                               <Separator className="my-4" />
                            </div>

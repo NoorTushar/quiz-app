@@ -22,41 +22,43 @@ const Questions = () => {
    };
    return (
       <div>
-         <Card className="max-w-[450px] mx-auto">
-            <CardHeader>
-               <CardTitle className="min-h-[50px]">
-                  {currenQuestion?.question}
-               </CardTitle>
-               <CardDescription>
-                  Question {currentQuestionIndex + 1} of {questions.length}
-               </CardDescription>
-            </CardHeader>
-            <CardContent>
-               {currenQuestion.options.map((option, index) => (
-                  <Button
-                     disabled={quizComplete}
-                     onClick={() => handleSelectAnswer(option)}
-                     size="lg"
-                     className={`w-full my-2  ${
-                        userAnswers[currentQuestionIndex] === option
-                           ? "bg-primary dark:bg-primary"
-                           : "bg-secondary dark:bg-secondary-foreground"
-                     }`}
-                     key={index + index * Math.random()}
-                     //  variant={
-                     //     userAnswers[currentQuestionIndex] === option
-                     //        ? "default"
-                     //        : "outline"
-                     //  }
-                  >
-                     {option}
-                  </Button>
-               ))}
-            </CardContent>
-            <CardFooter className="flex justify-between">
-               <QuizControls />
-            </CardFooter>
-         </Card>
+         {questions.length > 0 && (
+            <Card className="max-w-[450px] mx-auto">
+               <CardHeader>
+                  <CardTitle className="min-h-[50px]">
+                     {currenQuestion?.question}
+                  </CardTitle>
+                  <CardDescription>
+                     Question {currentQuestionIndex + 1} of {questions.length}
+                  </CardDescription>
+               </CardHeader>
+               <CardContent>
+                  {currenQuestion.options.map((option, index) => (
+                     <Button
+                        disabled={quizComplete}
+                        onClick={() => handleSelectAnswer(option)}
+                        size="lg"
+                        className={`w-full my-2  ${
+                           userAnswers[currentQuestionIndex] === option
+                              ? "bg-primary dark:bg-primary"
+                              : "bg-secondary dark:bg-secondary-foreground"
+                        }`}
+                        key={index + index * Math.random()}
+                        //  variant={
+                        //     userAnswers[currentQuestionIndex] === option
+                        //        ? "default"
+                        //        : "outline"
+                        //  }
+                     >
+                        {option}
+                     </Button>
+                  ))}
+               </CardContent>
+               <CardFooter className="flex justify-between">
+                  <QuizControls />
+               </CardFooter>
+            </Card>
+         )}
       </div>
    );
 };
